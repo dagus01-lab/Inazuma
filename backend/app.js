@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-const serviceAccount = require('inazuma-967fa-firebase-adminsdk-1vvh4-9167a87dcb.json');
+const serviceAccount = require('inazuma-967fa-firebase-adminsdk-1vvh4-d8db96c3ce.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://inazuma-967fa.firebaseio.com' // Replace with your Firebase project URL
