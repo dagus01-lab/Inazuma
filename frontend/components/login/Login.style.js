@@ -34,7 +34,20 @@ const styles = StyleSheet.create({
     marginTop: 32,
     borderBottomWidth: 1, // Spessore della linea inferiore
     borderColor: 'gray', // Colore della linea inferiore
-  
+  },
+  inputContainer: {
+    marginTop: 32,
+    backgroundColor: 'white',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1, // Spessore della linea inferiore
+    borderColor: 'gray', // Colore della linea inferiore
+  },
+  inputField: {
+    fontSize: 16,
+    height: 40,
+    width: 340
   },
   input: {
     height: 40,
@@ -56,10 +69,29 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
+  buttonConfirm: {
+    backgroundColor: '#1e90ff',
+    padding: 20,
+    borderRadius: 10,
+    width: 200,
+    alignItems: 'center',
+  },
   buttonText: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
   },
+  eyeIcon: {
+    marginLeft: 310,
+    
+  },
+  date_container: {
+    flexDirection: 'row',
+    marginTop: 30,
+    marginRight: 10,
+  },
+  date: {
+    width: 150
+  }
 });
 export default styles;
