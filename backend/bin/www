@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('backend:server');
-var http = require('http');
+var https = require('https');
 
 /**
  * Get port from environment and store in Express.
@@ -19,7 +19,10 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer({
+  key: fs.readFileSync('path-to-your-private-key.pem'), // Replace with your private key path
+  cert: fs.readFileSync('path-to-your-certificate.pem'), // Replace with your certificate path
+}, app);
 
 /**
  * Listen on provided port, on all network interfaces.

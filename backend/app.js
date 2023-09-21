@@ -6,6 +6,8 @@ var logger = require('morgan');
 var firebase_admin = require('firebase-admin')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 var app = express();
 
@@ -24,6 +26,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Middleware
+app.use(bodyParser.json())
+app.use(cors())
+
+//API endpoints
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
