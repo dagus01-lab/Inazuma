@@ -11,17 +11,17 @@ of friends with whom to book football fields and play together.
     * [Configuration](#client_configuration)
     * [Usage](#client_usage)
 
-##backend
+## Backend
 The backend is a nodejs server.
 It also acts as a middleware server between the client and the firebase DBMS
 
-##server_installation
-##server_configuration
-##server_usage
+## Server_installation
+## Server_configuration
+## Server_usage
 
-##client
+## Client
 The frontend is a react-native application.
 
-##client_installation
-##client_configuration
-##client_usage
+## Client_installation
+## Client_configuration
+## Client_usage
