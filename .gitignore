@@ -1,6 +1,14 @@
-inazuma-967fa-firebase-adminsdk-1vvh4-d8db96c3ce.json
-node_modules
-private-key.pem
-certificate.pem
-csr.pem
-token_secret_key
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store

@@ -1,27 +1,14 @@
-# Inazuma
-Football fields booking application.
-This application provides the opportunity for football enthsiasts to build a network
-of friends with whom to book football fields and play together.
-* [Backend](#backend)
-    * [Installation](#server_installation)
-    * [Configuration](#server_configuration)
-    * [Usage](#server_usage)
-* [Frontend](#client)
-    * [Installation](#client_installation)
-    * [Configuration](#client_configuration)
-    * [Usage](#client_usage)
+# Expo Router Example
 
-##backend
-The backend is a nodejs server.
-It also acts as a middleware server between the client and the firebase DBMS
+Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
 
-##server_installation
-##server_configuration
-##server_usage
+## 🚀 How to use
 
-##client
-The frontend is a react-native application.
+```sh
+npx create-expo-app -e with-router
+```
 
-##client_installation
-##client_configuration
-##client_usage
+## 📝 Notes
+
+- [Expo Router: Docs](https://expo.github.io/router)
+- [Expo Router: Repo](https://github.com/expo/router)

@@ -4,3 +4,4 @@ private-key.pem
 certificate.pem
 csr.pem
 token_secret_key
+secrets
