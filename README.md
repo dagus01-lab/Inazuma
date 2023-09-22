@@ -1,14 +1,24 @@
 # Expo Router Example
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
-
-## 🚀 How to use
-
-```sh
-npx create-expo-app -e with-router
+## Backend
+The backend is a nodejs server.
+It also acts as a middleware server between the client and the firebase DBMS.
+To start the backend type:
+```
+npm start
 ```
 
-## 📝 Notes
+## Server_installation
+## Server_configuration
+## Server_usage
 
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+## Client
+The frontend is a react-native application.
+In order to start it type
+```
+npx expo start
+```
+
+## Client_installation
+## Client_configuration
+## Client_usage
