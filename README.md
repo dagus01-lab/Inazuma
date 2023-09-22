@@ -13,7 +13,11 @@ of friends with whom to book football fields and play together.
 
 ##backend
 The backend is a nodejs server.
-It also acts as a middleware server between the client and the firebase DBMS
+It also acts as a middleware server between the client and the firebase DBMS.
+To start the backend type:
+```
+npm start
+```
 
 ##server_installation
 ##server_configuration
@@ -21,6 +25,10 @@ It also acts as a middleware server between the client and the firebase DBMS
 
 ##client
 The frontend is a react-native application.
+In order to start it type
+```
+npx expo start
+```
 
 ##client_installation
 ##client_configuration
