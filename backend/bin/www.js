@@ -4,25 +4,26 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('backend:server');
-var https = require('https');
+import { app } from '../app.js';
+import https from 'https';
+import '../utils.js'
+import { myReadFile } from '../utils.js';
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
-var server = https.createServer({
-  key: fs.readFileSync('path-to-your-private-key.pem'), // Replace with your private key path
-  cert: fs.readFileSync('path-to-your-certificate.pem'), // Replace with your certificate path
-}, app);
+const options = {
+  key: myReadFile('./private-key.pem'), 
+  cert: myReadFile('./server.crt'),
+}
+const server = https.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -81,7 +82,7 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Event listener for HTTPS server "listening" event.
  */
 
 function onListening() {
@@ -89,5 +90,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }
