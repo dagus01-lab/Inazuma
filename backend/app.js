@@ -19,7 +19,7 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //Middleware
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
 //app.use(cors())
 
 //useful functions
@@ -34,7 +34,9 @@ function isAuthenticated(req, res, next) {
 
 //API endpoints
 app.post('/api/login', async(req, res) => {
-  credentials = req.body;
+  try{
+  console.log(req.body)
+  var credentials = req.body;
 
   // Authenticate the user with Firebase Authentication
   signInWithEmailAndPassword(credentials.email, credentials.password).catch(function(error) {
@@ -58,6 +60,10 @@ app.post('/api/login', async(req, res) => {
 
   // Return the token to the client
   res.status(200).json({ message: 'Login successful'});
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(401).json({ message: 'Login failed', error: error.message });
+  }
 })
 /* POST signup api */
 app.post('/api/signup', async(req, res) => {
