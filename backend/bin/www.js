@@ -6,8 +6,7 @@
 
 import { app } from '../app.js';
 import https from 'https';
-import '../utils.js'
-import { myReadFile } from '../utils.js';
+import fs from 'fs';
 
 /**
  * Get port from environment and store in Express.
@@ -17,11 +16,11 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTPS server.
  */
 const options = {
-  key: myReadFile('./private-key.pem'), 
-  cert: myReadFile('./server.crt'),
+  key: fs.readFileSync('./private-key.pem'), 
+  cert: fs.readFileSync('./server.crt'),
 }
 const server = https.createServer(options, app);
 

@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import admin from "./firebase.js"
+import {admin, signInWithEmailAndPassword} from "./firebase.js"
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -19,8 +19,8 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //Middleware
-app.use(bodyParser.json())
-app.use(cors())
+//app.use(bodyParser.json())
+//app.use(cors())
 
 //useful functions
 function isAuthenticated(req, res, next) {
@@ -34,10 +34,10 @@ function isAuthenticated(req, res, next) {
 
 //API endpoints
 app.post('/api/login', async(req, res) => {
-  const { email, password } = req.body;
+  credentials = JSON.parse(req.body);
 
   // Authenticate the user with Firebase Authentication
-  admin.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  signInWithEmailAndPassword(credentials.email, credentials.password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -62,17 +62,17 @@ app.post('/api/login', async(req, res) => {
 /* POST signup api */
 app.post('/api/signup', async(req, res) => {
 try {
-  const { username, email, password, phonenumber, birthdate } = req.body;
+  user = JSON.parse(req.body);
 
   // Register the user with Firebase api
   admin.auth().createUser(
     {
-      username: username,
-      email: email,
+      username: user.username,
+      email: user.email,
       emailVerified: false,
-      password: password,
-      phoneNumber: phonenumber,
-      birthDate: birthdate,
+      password: user.password,
+      phoneNumber: user.phonenumber,
+      birthDate: user.birthdate,
     }
   ).then(function(userRecord) {
     console.log("User created with uid:", userRecord.uid);

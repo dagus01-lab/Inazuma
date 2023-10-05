@@ -1,5 +1,5 @@
-import admin from "firebase-admin";
-import "firebase-auth"
+import  admin from 'firebase-admin';
+import signInWithEmailAndPassword from 'firebase-auth';
 import {myReadFile} from './utils.js'
 
 var serviceAccount = JSON.parse(myReadFile('./credentials.json'));
@@ -10,4 +10,4 @@ const firebaseConfig = {
 
 admin.initializeApp(firebaseConfig);
 
-export default { admin };
+export {admin, signInWithEmailAndPassword}
