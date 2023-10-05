@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import styles from './Login.style';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../utili/useTogglePasswordVisibility';
+import { Stack } from 'expo-router';
 
 const Login = (onLogIn) => {
   const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
@@ -17,11 +18,12 @@ const Login = (onLogIn) => {
   }
 
   const registrazione = () => {
-    router.push('');
-  }
+    router.replace("/Registrazione");
+    }
   
   return (
     <View style={styles.container}> 
+      <Stack.Screen options={{ headerStyle: { backgroundColor: '#f4f4f4'}, headerShadowVisible: false, headerTitle: ""}}/>
      <View style={styles.riga}>
         <View style={styles.blueCircle} />
         <Text style={styles.title}>Inazuma</Text>     

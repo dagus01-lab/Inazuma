@@ -4,9 +4,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    height: "100%",
     alignItems: 'center',
     justifyContent: 'center', 
-    //   backgroundColor: 'white',
+   // backgroundColor: '#f4f4f4',
     },
   riga: {
     flexDirection: 'row'
@@ -31,49 +32,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   textInput: {
-    marginTop: 32,
-    borderBottomWidth: 1, // Spessore della linea inferiore
-    borderColor: 'gray', // Colore della linea inferiore
+    backgroundColor: 'white',
+    borderRadius: 8,
+    marginTop: 80,
+    borderWidth: 1,
+    borderColor: 'black', // Colore della linea inferiore
   },
   inputContainer: {
-    marginTop: 32,
+    borderRadius: 8,
+    marginTop: 34,
     backgroundColor: 'white',
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1, // Spessore della linea inferiore
-    borderColor: 'gray', // Colore della linea inferiore
+    borderWidth: 1,
+    borderColor: 'black', // Colore della linea inferiore
   },
   inputField: {
+    marginLeft: 10,
     fontSize: 16,
-    height: 40,
+    height: 56,
     width: 340
   },
-  input: {
-    height: 40,
-    width: 340,
-    fontSize: 16,
-  },
-  box: {
-    flexDirection: 'row',
-    marginTop: 40,
-  },
-  boxDue: {
-    flexDirection: 'row',
-    marginTop: 30,
-  },
   button: {
-    marginTop: 30,
+    marginTop: 54,
     backgroundColor: '#1e90ff',
     padding: 20,
     borderRadius: 10,
-    alignItems: 'center',
-  },
-  buttonConfirm: {
-    backgroundColor: '#1e90ff',
-    padding: 20,
-    borderRadius: 10,
-    width: 200,
     alignItems: 'center',
   },
   buttonText: {
@@ -81,17 +66,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  eyeIcon: {
-    marginLeft: 310,
-    
-  },
-  date_container: {
+  horizontalLine: {
     flexDirection: 'row',
-    marginTop: 30,
-    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 54,
+    margin: 30,
+   
   },
-  date: {
-    width: 150
-  }
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#d3d3d3',
+  },
+  lineText: {
+    marginHorizontal: 10,
+    color: '#d3d3d3', 
+  },
 });
 export default styles;
