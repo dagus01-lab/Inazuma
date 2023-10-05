@@ -68,8 +68,7 @@ app.post('/api/login', async(req, res) => {
 /* POST signup api */
 app.post('/api/signup', async(req, res) => {
 try {
-  console.log(req.body)
-  var user = req.body;
+  user = JSON.parse(req.body);
 
   // Register the user with Firebase api
   admin.auth().createUser(
@@ -88,7 +87,7 @@ try {
   });
 
   //send email for verification
-  admin.auth().getUserByEmail(user.email).sendEmailVerification().then({
+  admin.auth().getUserByEmail(email).sendEmailVerification().then({
     function(){
       console.log("Email sent");
     }

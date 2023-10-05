@@ -6,7 +6,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../utili/useTogglePasswordVisibility';
 import { Stack } from 'expo-router';
 
-const Login = (onLogIn) => {
+
+const Login = ({onLogIn}) => {
   const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
   const router = useRouter();
   const [email, setEmail] = useState('');

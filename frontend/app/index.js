@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, ScrollView  } from 'react-native';
 import { Redirect, Stack, useRouter } from 'expo-router';
-
+import axios from 'axios';
 import Registrazione from './(components)/(registrazione)/Registrazione'
 import Login from './(components)/(login)/Login';
 
@@ -42,7 +42,7 @@ const Home = () => {
         <View style={{  backgroundColor: '#f4f4f4' , width: "100%", flex: 1}}>
              <Stack.Screen options={{ headerStyle: { backgroundColor: '#f4f4f4'}, headerShadowVisible: false, headerTitle: ""}}/>
             <ScrollView showsVerticalScrollIndicator={false} style={{width: "100%"}}>
-           { isLogged ? <Registrazione/> : <Login/> }
+           { isLogged ? <Registrazione/> : <Login onLogIn={logIn}/> }
                        </ScrollView>
         </View>
     )
