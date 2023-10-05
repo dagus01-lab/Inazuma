@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../utili/useTogglePasswordVisibility';
 import { useTogglePasswordVisibility_other } from '../utili/useTogglePasswordVisibility_other';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { Stack } from 'expo-router';
 
 const Registrazione = () => {
   const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
@@ -94,6 +95,7 @@ const Registrazione = () => {
 
   return (
     <View style={styles.container}> 
+        <Stack.Screen options={{ headerStyle: { backgroundColor: '#f4f4f4'}, headerShadowVisible: false, headerTitle: ""}}/>
      <View style={styles.riga}>
         <View style={styles.blueCircle} />
         <Text style={styles.title}>Inazuma</Text>     
