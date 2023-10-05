@@ -19,7 +19,7 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //Middleware
-//app.use(bodyParser.json())
+app.use(bodyParser.json())
 //app.use(cors())
 
 //useful functions
@@ -34,7 +34,7 @@ function isAuthenticated(req, res, next) {
 
 //API endpoints
 app.post('/api/login', async(req, res) => {
-  credentials = JSON.parse(req.body);
+  credentials = req.body;
 
   // Authenticate the user with Firebase Authentication
   signInWithEmailAndPassword(credentials.email, credentials.password).catch(function(error) {
@@ -62,7 +62,8 @@ app.post('/api/login', async(req, res) => {
 /* POST signup api */
 app.post('/api/signup', async(req, res) => {
 try {
-  user = JSON.parse(req.body);
+  console.log(req.body)
+  var user = req.body;
 
   // Register the user with Firebase api
   admin.auth().createUser(
@@ -81,7 +82,7 @@ try {
   });
 
   //send email for verification
-  admin.auth().getUserByEmail(email).sendEmailVerification().then({
+  admin.auth().getUserByEmail(user.email).sendEmailVerification().then({
     function(){
       console.log("Email sent");
     }
