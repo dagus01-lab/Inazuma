@@ -10,4 +10,5 @@ const firebaseConfig = {
 
 admin.initializeApp(firebaseConfig);
 
+
 export {admin, signInWithEmailAndPassword}

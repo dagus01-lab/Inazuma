@@ -3,6 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import {admin, signInWithEmailAndPassword} from "./firebase.js"
+import nodemailer from "nodemailer"
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -32,11 +33,20 @@ function isAuthenticated(req, res, next) {
   next();
 }
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'inazuma.staff.00@gmail.com',
+    pass: 'r{pTs{})dZg~>@r]e7N{',
+  },
+});
+
 //API endpoints
 app.post('/api/login', async(req, res) => {
   try{
-  console.log(req.body)
   var credentials = req.body;
+  console.log(credentials)
+  console.log(typeof credentials)
 
   // Authenticate the user with Firebase Authentication
   signInWithEmailAndPassword(credentials.email, credentials.password).catch(function(error) {
@@ -54,8 +64,6 @@ app.post('/api/login', async(req, res) => {
     return;
   });
 
-
-  // Check if the provided password is correct (You may need to implement this)
   // For security, it's recommended to use a library like bcrypt to hash and compare passwords.
 
   // Return the token to the client
@@ -68,10 +76,12 @@ app.post('/api/login', async(req, res) => {
 /* POST signup api */
 app.post('/api/signup', async(req, res) => {
 try {
-  user = JSON.parse(req.body);
+  var user = req.body;
+  console.log(user)
+  console.log(typeof user )
 
   // Register the user with Firebase api
-  admin.auth().createUser(
+  var userRecord = await admin.auth().createUser(
     {
       username: user.username,
       email: user.email,
@@ -80,25 +90,21 @@ try {
       phoneNumber: user.phonenumber,
       birthDate: user.birthdate,
     }
-  ).then(function(userRecord) {
-    console.log("User created with uid:", userRecord.uid);
-  }).catch(function(error) {
-    console.log("Error creating user:", error);
-  });
-
-  //send email for verification
-  admin.auth().getUserByEmail(email).sendEmailVerification().then({
-    function(){
-      console.log("Email sent");
-    }
-  }).catch(
-    function(error) {
-      console.log("Error sending email:", error);
-    }
   )
+  console.log("User created with uid:", userRecord.uid);
 
-  // Return the token to the client
-  res.status(200).json({ message: 'Registration successful', token });
+  // Send verification email
+  const emailVerificationLink = `https://localhost:3000/verify?token=${userRecord.emailVerificationToken}`;
+  const mailOptions = {
+    from: 'inazuma.staff.00@gmail.com',
+    to: userRecord.email,
+    subject: 'Email Verification',
+    text: `Please click the following link to verify your email: ${emailVerificationLink}`,
+  };
+
+  await transporter.sendMail(mailOptions);
+  res.status(200).send('Verification email sent successfully');
+
 } catch (error) {
   console.error('Error during registration:', error);
   res.status(401).json({ message: 'Registration failed', error: error.message });
