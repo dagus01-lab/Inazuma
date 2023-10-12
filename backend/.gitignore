@@ -6,3 +6,4 @@ csr.pem
 token_secret_key
 secrets.txt
 server.crt
+google_client_secret.json
