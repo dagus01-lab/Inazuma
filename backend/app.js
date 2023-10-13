@@ -4,6 +4,9 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import {admin, signInWithEmailAndPassword} from "./firebase.js"
 import nodemailer from "nodemailer"
+import google from 'google-auth-library'
+import fs from 'fs'
+import readline from 'readline'
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -33,11 +36,28 @@ function isAuthenticated(req, res, next) {
   next();
 }
 
+var credentials = JSON.parse(fs.readFileSync('google_client_secret.json')).web 
+const oAuth2Client = new google.OAuth2Client(
+  credentials.client_id,
+  credentials.client_secret,
+  credentials.redirect_uri,
+);
+
+oAuth2Client.setCredentials({
+  refresh_token: credentials.refresh_token,
+});
+const accessToken = await oAuth2Client.getAccessToken();
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
+    type: 'OAuth2',
     user: 'inazuma.staff.00@gmail.com',
-    pass: 'r{pTs{})dZg~>@r]e7N{',
+    pass: credentials.password,
+    clientId: credentials.client_id,
+    clientSecret: credentials.client_secret,
+    refreshToken: credentials.refresh_token,
+    accessToken: accessToken,
   },
 });
 
@@ -47,21 +67,34 @@ app.post('/api/login', async(req, res) => {
   var credentials = req.body;
   console.log(credentials)
   console.log(typeof credentials)
+  console.log(credentials.email)
+  console.log(credentials.password)
+
+
 
   // Authenticate the user with Firebase Authentication
-  signInWithEmailAndPassword(credentials.email, credentials.password).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log(error);
-    if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
-      res.status(401).json({ message: 'Wrong credentials' });
-    } else {
-      alert(errorMessage);
-      res.status(401).json({ message: 'Authentication failed' });
-    }
-    return;
+  signInWithEmailAndPassword(credentials.email, credentials.password).then((user)=>{
+    //The promise sends me a user object, now I get the token, and refresh it by sending true (obviously another promise)            
+    user.getIdToken(true).then((token)=>{
+      rsp.writeHead(200, {"Content-Type": "application/json"});
+      rsp.end(JSON.stringify({token:token}));
+    }).catch((err)=>{
+      rsp.writeHead(500, {"Content-Type": "application/json"});
+      rsp.end(JSON.stringify({error:err}));
+    })
+  }).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(error);
+  if (errorCode === 'auth/wrong-password') {
+    alert('Wrong password.');
+    res.status(401).json({ message: 'Wrong credentials' });
+  } else {
+    alert(errorMessage);
+    res.status(401).json({ message: 'Authentication failed' });
+  }
+  return;
   });
 
   // For security, it's recommended to use a library like bcrypt to hash and compare passwords.
